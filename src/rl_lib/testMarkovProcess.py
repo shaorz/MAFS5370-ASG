@@ -140,7 +140,7 @@ class TestFiniteMarkovProcess ( unittest.TestCase ) :
             sys.stderr = StringIO ( )
 
             self.flip_flop.display_stationary_distribution ( )
-            self.flip_flop.generate_image ( )
+            # self.flip_flop.generate_image ( )
             self.flip_flop.__repr__ ( )
         except Exception :
             self.fail ( "Display functions raised an error." )

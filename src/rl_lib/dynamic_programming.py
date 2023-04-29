@@ -3,11 +3,11 @@ from typing import Dict, Iterator, Mapping, Tuple, TypeVar
 
 import numpy as np
 
-from distribution import Categorical, Choose
-from iterate import converged, iterate
-from markov_decision_process import (FiniteMarkovDecisionProcess, FiniteMarkovRewardProcess)
-from markov_process import NonTerminal, State
-from policy import FiniteDeterministicPolicy, FinitePolicy
+from src.rl_lib.distribution import Categorical, Choose
+from src.rl_lib.iterate import converged, iterate
+from src.rl_lib.markov_decision_process import (FiniteMarkovDecisionProcess, FiniteMarkovRewardProcess)
+from src.rl_lib.markov_process import NonTerminal, State
+from src.rl_lib.policy import FiniteDeterministicPolicy, FinitePolicy
 
 A = TypeVar ( 'A' )
 S = TypeVar ( 'S' )

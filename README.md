@@ -1,8 +1,8 @@
-# MAFS5370-ASG1
+# MAFS5370-ASG2
 
-In this repo, the file TD_QLearning.py is a implementation of TD method with Q-Learning based on a discrete state and action space settiing. And the report.pdf is the explanation of this work.
+In this repo, we refer to the MDP model from https://github.com/TikhonJelvis/RL-book (Ashwin Rao, Tikhon Jelvis) to develop a hedging model for ATM American options. 
 
-Moreover, we also implement a more powerful version which is able to solve more complex state and action setting by using function approximation, based on the tool developed by Rao and Jelvis with their book. You can find it in the src folder.
+The file tdATMAmericanOptionExerciseMDP scripts defines ATM American options as MDP with finite steps and uses backward induction to find the optimal value function and optimal policy at each time step 
 
 
 

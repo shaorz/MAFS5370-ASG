@@ -6,7 +6,6 @@ from dataclasses import dataclass
 from pprint import pprint
 from typing import (Callable, Dict, Generic, Iterable, Mapping, Sequence, Set, Tuple, TypeVar)
 
-import graphviz
 import numpy as np
 
 from src.rl_lib.distribution import (Categorical, Distribution, FiniteDistribution, SampledDistribution)
@@ -130,17 +129,17 @@ class FiniteMarkovProcess ( MarkovProcess [ S ] ):
     def display_stationary_distribution ( self ):
         pprint ( { s: round ( p, 3 ) for s, p in self.get_stationary_distribution ( ) } )
 
-    def generate_image ( self ) -> graphviz.Digraph:
-        d = graphviz.Digraph ( )
-
-        for s in self.transition_map.keys ( ):
-            d.node ( str ( s ) )
-
-        for s, v in self.transition_map.items ( ):
-            for s1, p in v:
-                d.edge ( str ( s ), str ( s1 ), label = str ( p ) )
-
-        return d
+    # def generate_image ( self ) -> graphviz.Digraph:
+    #     d = graphviz.Digraph ( )
+    #
+    #     for s in self.transition_map.keys ( ):
+    #         d.node ( str ( s ) )
+    #
+    #     for s, v in self.transition_map.items ( ):
+    #         for s1, p in v:
+    #             d.edge ( str ( s ), str ( s1 ), label = str ( p ) )
+    #
+    #     return d
 
 
 # Reward processes
