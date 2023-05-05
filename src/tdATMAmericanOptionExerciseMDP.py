@@ -79,64 +79,64 @@ if __name__ == '__main__':
     num_steps_val: int = 10
 
     if is_call:
-        opt_payoff = lambda _, x: max(x - strike, 0)
+        opt_payoff = lambda _ , x: max ( x - strike , 0 )
     else:
-        opt_payoff = lambda _, x: max(strike - x, 0)
+        opt_payoff = lambda _ , x: max ( strike - x , 0 )
 
-    opt_ex_bin_tree: OptimalExerciseBinTree = OptimalExerciseBinTree(
-        spot_price=spot_price_val,
-        payoff=opt_payoff,
-        expiry=expiry_val,
-        rate=rate_val,
-        vol=vol_val,
-        num_steps=num_steps_val
-    )
+    opt_ex_bin_tree: OptimalExerciseBinTree = OptimalExerciseBinTree (
+        spot_price = spot_price_val ,
+        payoff = opt_payoff ,
+        expiry = expiry_val ,
+        rate = rate_val ,
+        vol = vol_val ,
+        num_steps = num_steps_val
+        )
 
-    vf_seq, policy_seq = zip(*opt_ex_bin_tree.get_opt_vf_and_policy())
-    ex_boundary: Sequence[Tuple[float, float]] = opt_ex_bin_tree.option_exercise_boundary(policy_seq, is_call)
-    time_pts, ex_bound_pts = zip(*ex_boundary)
+    vf_seq , policy_seq = zip ( *opt_ex_bin_tree.get_opt_vf_and_policy () )
+    ex_boundary: Sequence [ Tuple [ float , float ] ] = opt_ex_bin_tree.option_exercise_boundary ( policy_seq , is_call )
+    time_pts , ex_bound_pts = zip ( *ex_boundary )
     label = ("Call" if is_call else "Put") + " Option Exercise Boundary"
-    plot_list_of_curves(
-        list_of_x_vals=[time_pts],
-        list_of_y_vals=[ex_bound_pts],
-        list_of_colors=["b"],
-        list_of_curve_labels=[label],
-        x_label="Time",
-        y_label="Underlying Price",
-        title=label
-    )
+    plot_list_of_curves (
+        list_of_x_vals = [ time_pts ] ,
+        list_of_y_vals = [ ex_bound_pts ] ,
+        list_of_colors = [ "b" ] ,
+        list_of_curve_labels = [ label ] ,
+        x_label = "Time" ,
+        y_label = "Underlying Price" ,
+        title = label
+        )
 
-    am_price: float = vf_seq[0][NonTerminal(0)]
-    print(f"American Price = {am_price:.3f}")
+    am_price: float = vf_seq [ 0 ] [ NonTerminal ( 0 ) ]
+    print ( f"American Price = {am_price:.3f}" )
 
     is_call: bool = True
     if is_call:
-        opt_payoff = lambda _, x: max(x - strike, 0)
+        opt_payoff = lambda _ , x: max ( x - strike , 0 )
     else:
-        opt_payoff = lambda _, x: max(strike - x, 0)
+        opt_payoff = lambda _ , x: max ( strike - x , 0 )
 
-    opt_ex_bin_tree: OptimalExerciseBinTree = OptimalExerciseBinTree(
-        spot_price=spot_price_val,
-        payoff=opt_payoff,
-        expiry=expiry_val,
-        rate=rate_val,
-        vol=vol_val,
-        num_steps=num_steps_val
-    )
+    opt_ex_bin_tree: OptimalExerciseBinTree = OptimalExerciseBinTree (
+        spot_price = spot_price_val ,
+        payoff = opt_payoff ,
+        expiry = expiry_val ,
+        rate = rate_val ,
+        vol = vol_val ,
+        num_steps = num_steps_val
+        )
 
-    vf_seq, policy_seq = zip(*opt_ex_bin_tree.get_opt_vf_and_policy())
-    ex_boundary: Sequence[Tuple[float, float]] = opt_ex_bin_tree.option_exercise_boundary(policy_seq, is_call)
-    time_pts, ex_bound_pts = zip(*ex_boundary)
+    vf_seq , policy_seq = zip ( *opt_ex_bin_tree.get_opt_vf_and_policy () )
+    ex_boundary: Sequence [ Tuple [ float , float ] ] = opt_ex_bin_tree.option_exercise_boundary ( policy_seq , is_call )
+    time_pts , ex_bound_pts = zip ( *ex_boundary )
     label = ("Call" if is_call else "Put") + " Option Exercise Boundary"
-    plot_list_of_curves(
-        list_of_x_vals=[time_pts],
-        list_of_y_vals=[ex_bound_pts],
-        list_of_colors=["b"],
-        list_of_curve_labels=[label],
-        x_label="Time",
-        y_label="Underlying Price",
-        title=label
-    )
+    plot_list_of_curves (
+        list_of_x_vals = [ time_pts ] ,
+        list_of_y_vals = [ ex_bound_pts ] ,
+        list_of_colors = [ "b" ] ,
+        list_of_curve_labels = [ label ] ,
+        x_label = "Time" ,
+        y_label = "Underlying Price" ,
+        title = label
+        )
 
-    am_price: float = vf_seq[0][NonTerminal(0)]
-    print(f"American Price = {am_price:.3f}")
+    am_price: float = vf_seq [ 0 ] [ NonTerminal ( 0 ) ]
+    print ( f"American Price = {am_price:.3f}" )
