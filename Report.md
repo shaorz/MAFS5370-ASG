@@ -142,6 +142,14 @@ Overall, the SAC agent under the GBM setting for American option pricing is a po
 
 ### 7. Guide Actor-Critic Agent under GBM setting
 
+The Guide Actor-Critic Agent (GACA) is a type of reinforcement learning algorithm that can be applied to optimize the parameters of a Geometric Brownian Motion (GBM) model, which can in turn be used to price American options.  GACA_GBM.py uses the following steps to develop a GACA model:
+
+1. Define the state space: In the GBM setting, the state space can be defined as the current stock price, the time to maturity, and the volatility of the stock price.
+2. Define the action space: The action space can be defined as the parameters of the GBM model, which include the drift rate, volatility, and initial stock price.
+3. Define the reward function: The reward function can be defined as the payoff of the American option at each time step.
+4. Train the GACA agent: The GACA agent learns to optimize the parameters of the GBM model by maximizing the expected cumulative reward over time. The agent consists of two components: the critic network, which estimates the expected cumulative reward, and the actor network, which generates the policy for selecting actions.
+5. Use the trained GBM model to price the American option: Once the GACA agent has been trained, the optimized GBM model can be used to simulate stock price paths and calculate the expected payoff of the American option.
+
 ### 8. Discussion
 Comparing with SARSA/Q-learning technic we used in Assignment1, the major advantage of policy-gradient approaches is that they can handle high-dimensional action and state spaces, including actions and states that are continuous. This is because we do not have to iterate over all actions using $argmax_{\alpha \in A(S)}$ as we do in value-based approaches. For continuous problems, $argmax_{\alpha \in A(S)}$ is not possible to calculate, while for a high number of actions, the computational complexity is dependent on the number of actions.
 
