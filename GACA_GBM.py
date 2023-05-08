@@ -58,22 +58,27 @@ class GACAgent:
         return action.numpy()[0]
     
     def learn(self, state, action, reward, next_state, done):
-        target_value = reward
-        if not done:
-            target_value += 0.99 * self.critic_network.predict(np.array([next_state]))[0][0]
-        
-        advantage = target_value - self.critic_network.predict(np.array([state]))[0][0]
-        
-        with tf.GradientTape() as actor_tape, tf.GradientTape() as critic_tape:
-            actor_prob = self.actor_network(np.array([state]))
-            action_dist = tfp.distributions.Bernoulli(probs=actor_prob)
-            log_prob = action_dist.log_prob(action)
-            
-            actor_loss = -log_prob * advantage
-            critic_loss = advantage**2
-            
-            actor_grads = actor_tape.gradient(actor_loss, self.actor
+        # Compute TD error
+        td_target = reward + self.gamma * self.q_target(next_state, self.actor_target(next_state))
+        td_error = td_target - self.q_value(state, action)
 
+        # Update Q function
+        q_loss = F.mse_loss(self.q_value(state, action), td_target)
+        self.q_optimizer.zero_grad()
+        q_loss.backward()
+        self.q_optimizer.step()
+
+        # Update policy function
+        policy_loss = -self.q_value(state, self.actor(state)).mean()
+        self.actor_optimizer.zero_grad()
+        policy_loss.backward()
+        self.actor_optimizer.step()
+
+        # Update target networks
+        self.update_target_networks()
+
+        return td_error.detach().numpy()
+    
                                               
 def main():
     # Set the option parameters
