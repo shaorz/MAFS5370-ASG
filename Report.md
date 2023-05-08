@@ -39,5 +39,7 @@ Variables we used in this model are summarized as follows:
 
 ## 6. Discussion
 Comparing with SARSA/Q-learning technic we used in Assignment1, the major advantage of policy-gradient approaches is that they can handle high-dimensional action and state spaces, including actions and states that are continuous. This is because we do not have to iterate over all actions using $argmax_{\alpha \in A(S)}$ as we do in value-based approaches. For continuous problems, $argmax_{\alpha \in A(S)}$ is not possible to calculate, while for a high number of actions, the computational complexity is dependent on the number of actions.
+
 However, a disadvantage of REINFORCE is known as sample inefficiency. Since the policy gradients algorithm takes an entire episode to do the update, it is difficult to determine which of the state-action pairs are those that effect the value G(the episode reward).
+
 Moreover, model-free reinforcement learning is a particularly challenging case to understand and explain why a policy is making a decision. This is largely due to the model-free property: there are no action definitions that can used as these are unknown. However, policy gradients are particularly difficult because the values of states are unknown: we just have a resulting policy. With value-based approaches, knowing $V$ or $Q$ provides some insight into why actions are chosen by a policy; although explainability problems still remain.
