@@ -24,7 +24,15 @@ The goal of a policy gradient is to approximate the optimal policy
  for the particular MDP.
 
 ## 3. MDP Formulation
-
+Variables we used in this model are summarized as follows:
+|Variable|Description|Value|
+|:-:|:-:|:-:|
+|$S_0$|Initial Stock Price|100|
+|$S_t$|Stock Price Development|Float|
+|$K$|Strike Price|100|
+|$R_f$|Risk Free Rate|5%|
+|$\sigma$|volatility|0.2|
+|$T$|Time to Maturity|10|
 ## 4. Methodology
 
 ## 5. Results
