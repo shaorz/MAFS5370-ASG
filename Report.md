@@ -108,7 +108,27 @@ Environment Variables in the GBM setting are similar to the Binomial, the only d
 
 ### 5. Deep Deterministic Policy Gradient Agent under GBM setting
 
+Deep Deterministic Policy Gradient (DDPG) is a type of reinforcement learning algorithm that combines both deep neural networks and policy gradients to solve complex decision-making problems in continuous action spaces.
+
+In the context of option pricing, DDPG can be used to learn an optimal policy for an agent to determine the optimal exercise strategy for an American option. Specifically, the agent can use the DDPG algorithm to learn the optimal policy for determining the optimal exercise time for an American option given its current state (e.g., underlying asset price, time to expiration, etc.) and based on a set of available actions (e.g., exercise or hold).
+
+Under the Gradient Boosting Machine (GBM) setting, the DDPG agent is trained using a GBM model to generate synthetic data for training. The GBM model can be used to simulate future asset price movements and generate a large number of training examples for the DDPG agent to learn from.
+
+The DDPG agent learns by using a combination of policy evaluation and policy improvement steps. During the policy evaluation step, the agent uses the current policy to generate a set of actions, and evaluates their expected future reward using the GBM model. During the policy improvement step, the agent updates the policy based on the expected future reward to improve its performance.
+
+Overall, the DDPG agent under GBM setting for American option pricing is a powerful and flexible approach that can learn an optimal exercise strategy for American options, even under complex market conditions.
+
 ### 6. **Soft Actor-Critic Agent under GBM setting**
+
+Soft Actor-Critic (SAC) is another type of reinforcement learning algorithm that has shown great potential in solving complex decision-making problems in continuous action spaces, including the American option pricing problem.
+
+In the context of option pricing, SAC can be used to learn an optimal policy for an agent to determine the optimal exercise strategy for an American option, given its current state and based on a set of available actions. The SAC algorithm uses a variant of the policy gradient method, which is designed to optimize the policy by taking into account both the expected future rewards and the entropy of the policy distribution.
+
+Under the Gradient Boosting Machine (GBM) setting, the SAC agent is trained using a GBM model to generate synthetic data for training. The GBM model can be used to simulate future asset price movements and generate a large number of training examples for the SAC agent to learn from.
+
+The SAC agent learns by using a combination of actor and critic networks. The actor network is used to generate a set of actions, while the critic network is used to evaluate the expected future rewards for those actions. The entropy of the policy distribution is also taken into account during training to encourage exploration and prevent premature convergence to a suboptimal solution.
+
+Overall, the SAC agent under the GBM setting for American option pricing is a powerful and flexible approach that can learn an optimal exercise strategy for American options, even under complex market conditions. The combination of the policy gradient method and the GBM model can help the agent learn from a large number of training examples, leading to improved accuracy and generalization performance.
 
 ### 7. Guide Actor-Critic Agent under GBM setting
 
