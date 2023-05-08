@@ -83,54 +83,42 @@ class GACA_GBM:
 		for target_param , param in zip ( target_net.parameters () , net.parameters () ):
 			target_param.data.copy_ ( tau * param.data + (1 - tau) * target_param.data )
 
-		def learn ( self , replay_buffer , iterations , batch_size = 64 , gamma = 0.99 , soft_tau = 1e-2 ):
-			for it in range ( iterations ):
-				# Sample replay buffer
-				state , action , reward , next_state , done = replay_buffer.sample ( batch_size )
-				state = torch.FloatTensor ( state ).to ( self.device )
-				next_state = torch.FloatTensor ( next_state ).to ( self.device )
-				action = torch.FloatTensor ( action ).to ( self.device )
-				reward = torch.FloatTensor ( reward ).to ( self.device )
-				done = torch.FloatTensor ( done ).to ( self.device )
+	def learn ( self , replay_buffer , iterations , batch_size = 64 , gamma = 0.99 , soft_tau = 1e-2 ):
+		for it in range ( iterations ):
+			# Sample replay buffer
+			state , action , reward , next_state , done = replay_buffer.sample ( batch_size )
+			state = torch.FloatTensor ( state ).to ( self.device )
+			next_state = torch.FloatTensor ( next_state ).to ( self.device )
+			action = torch.FloatTensor ( action ).to ( self.device )
+			reward = torch.FloatTensor ( reward ).to ( self.device )
+			done = torch.FloatTensor ( done ).to ( self.device )
 
-				# Compute the target Q value
-				target_Q = self.critic_target ( next_state , self.actor_target ( next_state ) )
-				target_Q = reward + ((1 - done) * gamma * target_Q).detach ()
+			# Compute the target Q value
+			target_Q = self.critic_target ( next_state , self.actor_target ( next_state ) )
+			target_Q = reward + ((1 - done) * gamma * target_Q).detach ()
 
-				# Get current Q estimate
-				current_Q = self.critic ( state , action )
+			# Get current Q estimate
+			current_Q = self.critic ( state , action )
 
-				# Compute critic loss
-				critic_loss = F.mse_loss ( current_Q , target_Q )
+			# Compute critic loss
+			critic_loss = F.mse_loss ( current_Q , target_Q )
 
-				# Optimize the critic
-				self.critic_optimizer.zero_grad ()
-				critic_loss.backward ()
-				self.critic_optimizer.step ()
+			# Optimize the critic
+			self.critic_optimizer.zero_grad ()
+			critic_loss.backward ()
+			self.critic_optimizer.step ()
 
-				# Compute actor loss
-				actor_loss = -self.critic ( state , self.actor ( state ) ).mean ()
+			# Compute actor loss
+			actor_loss = -self.critic ( state , self.actor ( state ) ).mean ()
 
-				# Optimize the actor
-				self.actor_optimizer.zero_grad ()
-				actor_loss.backward ()
-				self.actor_optimizer.step ()
+			# Optimize the actor
+			self.actor_optimizer.zero_grad ()
+			actor_loss.backward ()
+			self.actor_optimizer.step ()
 
-				# Update the target networks
-				for param , target_param in zip ( self.critic.parameters () , self.critic_target.parameters () ):
-					target_param.data.copy_ ( soft_tau * param.data + (1 - soft_tau) * target_param.data )
+			# Update the target networks
+			for param , target_param in zip ( self.critic.parameters () , self.critic_target.parameters () ):
+				target_param.data.copy_ ( soft_tau * param.data + (1 - soft_tau) * target_param.data )
 
-				for param , target_param in zip ( self.actor.parameters () , self.actor_target.parameters () ):
-					target_param.data.copy_ ( soft_tau * param.data + (1 - soft_tau) * target_param.data )
-
-
-def main ():
-	# Set the option parameters
-	S0 = 100  # Stock price
-	K = 100  # Strike price
-	T = 10  # Time to maturity (in years)
-	sigma = 0.2  # Volatility
-	r = 0.05  # Risk-free rate
-
-
-main ()
+			for param , target_param in zip ( self.actor.parameters () , self.actor_target.parameters () ):
+				target_param.data.copy_ ( soft_tau * param.data + (1 - soft_tau) * target_param.data )
