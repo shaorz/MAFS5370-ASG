@@ -1,5 +1,4 @@
-# MAFS5370 Assignment 1
-# Derivative Hedging and Pricing Based on Reinforcement Learning
+# MAFS5370 Assignment 2 - Derivative Hedging and Pricing Based on Reinforcement Learning
 
 - SHAO, Ruizhao 
 - WANG, Liangshu
